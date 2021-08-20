@@ -1,0 +1,28 @@
+<div class="container" *ngIf="(favorites$ | async) as favorites">
+  <div *ngIf="favorites.length else noDataRef" class="row"
+       infinite-scroll
+       [infiniteScrollDistance]="scrollDistance"
+       [infiniteScrollUpDistance]="scrollUpDistance"
+       [infiniteScrollThrottle]="throttle"
+       (scrolled)="onScrollDown()">
+    <ngx-masonry [options]="masonryOptions" [ordered]="true" [updateLayout]="true" style="width: 90vw;">
+      <div *ngFor="let favorite of favorites"
+           ngxMasonryItem
+           class="col-sm-6 col-lg-4 mb-4 masonry-item">
+        <div class="card" style="width: auto;">
+          <img class="card-img-top" [lazyLoad]="favorite.url" alt="">
+        </div>
+        <div class="overlay d-flex">
+          <span>{{favorite.description}}</span>
+          <div class="d-inline-flex gap-1">
+            <a href="#" class="btn btn-danger" (click)="remove($event, favorite.id)">remove from favorites</a>
+            <a [href]="favorite.downloadUrl" class="btn btn-link" [download]="'favorite-' + favorite.id">download</a>
+          </div>
+        </div>
+      </div>
+    </ngx-masonry>
+  </div>
+  <ng-template #noDataRef>
+    <h3 class="text-center">No Images To Show!</h3>
+  </ng-template>
+</div>
