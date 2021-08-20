@@ -16,13 +16,13 @@
           <span>{{favorite.description}}</span>
           <div class="d-inline-flex gap-1">
             <a href="#" class="btn btn-danger" (click)="remove($event, favorite.id)">remove from favorites</a>
-            <a [href]="favorite.downloadUrl" class="btn btn-link" [download]="'favorite-' + favorite.id">download</a>
+            <a [href]="favorite.downloadUrl" target="_blank" class="btn btn-link" [download]="'favorite-' + favorite.id">download</a>
           </div>
         </div>
       </div>
     </ngx-masonry>
   </div>
   <ng-template #noDataRef>
-    <h3 class="text-center">No Images To Show!</h3>
+    <h3 class="text-center">No Favorites To Show!</h3>
   </ng-template>
 </div>
